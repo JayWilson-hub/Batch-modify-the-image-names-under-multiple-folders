@@ -1,0 +1,24 @@
+import os 
+
+outer_path = ''
+folderlist = os.listdir(outer_path)
+
+for folder in folderlist:
+    
+    inner_path = os.path.join(outer_path, folder)
+    total_num_folder = len(folderlist)
+    print ('total have %d folders' % (total_num_folder))
+
+    filelist = os.listdir(inner_path)
+    i = 0
+    for item in filelist:
+          total_num_file = len(filelist)
+          if item.endswith('.jpg'):
+              src = os.path.join(os.path.abspath(inner_path), item)
+              dst = os.path.join(os.path.abspath(inner_path), str(folder) + '_' + str(i) + '.jpg')
+              try:
+                  os.rename(src, dst)
+                  print('converting %s to %s ...' % (src, dst))
+              except:
+                      continue
+              print('total %d to rename & converted %d jpgs' % (total_num_file, i))
